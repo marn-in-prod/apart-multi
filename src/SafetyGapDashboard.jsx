@@ -64,8 +64,19 @@ const LANGUAGE_COVERAGE = {
   "Maltese": { score: 8, status: "critical", gaps: ["Jailbreak", "Bias", "Adversarial", "Toxicity", "General Safety", "Refusal"] },
 };
 
+const computeCoverageMatrix = () => {
+  return EU_LANGUAGES.map(lang => {
+    const langData = LANGUAGE_COVERAGE[lang];
+    const row = { language: lang };
+    CATEGORIES.forEach(cat => {
+      row[cat.name] = langData.gaps.includes(cat.name) ? 0 : 1;
+    });
+    return row;
+  });
+};
+
 export default function SafetyGapDashboard() {
-  const [view, setView] = useState('overview');
+  const [view, setView] = useState('heatmap');
   const [selectedLang, setSelectedLang] = useState(null);
 
   const criticalLangs = Object.entries(LANGUAGE_COVERAGE).filter(([_, d]) => d.status === 'critical').length;
@@ -153,6 +164,7 @@ export default function SafetyGapDashboard() {
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 4, marginBottom: 24 }}>
           {[
+            { id: 'heatmap', label: '🔥 Coverage Matrix' },
             { id: 'overview', label: '📊 Category Coverage' },
             { id: 'languages', label: '🌍 Language Gaps' },
             { id: 'benchmarks', label: '📚 Benchmark Database' },
@@ -335,7 +347,7 @@ export default function SafetyGapDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {BENCHMARKS.map((b, i) => (
+                  {BENCHMARKS.map((b) => (
                     <tr key={b.name} style={{ borderTop: '1px solid #2d2d44' }}>
                       <td style={{ padding: '12px 16px', fontWeight: 500, color: '#fff' }}>{b.name}</td>
                       <td style={{ padding: '12px 16px', color: '#94a3b8' }}>{b.category}</td>
@@ -356,6 +368,222 @@ export default function SafetyGapDashboard() {
             </div>
           </div>
         )}
+
+        {/* Coverage Matrix Heatmap View */}
+        {view === 'heatmap' && (() => {
+          const matrix = computeCoverageMatrix();
+          const totalCells = EU_LANGUAGES.length * CATEGORIES.length;
+          const coveredCells = matrix.reduce((sum, row) => {
+            return sum + CATEGORIES.reduce((catSum, cat) => catSum + row[cat.name], 0);
+          }, 0);
+          const coveragePct = Math.round((coveredCells / totalCells) * 100);
+          const gapPct = 100 - coveragePct;
+
+          return (
+            <div>
+              <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8, color: '#fff' }}>
+                Coverage Matrix: Languages × Risk Categories
+              </h2>
+              <p style={{ color: '#94a3b8', fontSize: 14, marginBottom: 20 }}>
+                Visual overview of benchmark coverage across all EU languages and safety categories.
+                Green indicates existing benchmark coverage; red indicates gaps.
+              </p>
+
+              {/* Legend and Stats */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 20,
+                padding: '12px 16px',
+                background: '#12121a',
+                border: '1px solid #2d2d44',
+                borderRadius: 8,
+              }}>
+                <div style={{ display: 'flex', gap: 24 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ width: 16, height: 16, borderRadius: 3, background: '#10b981' }} />
+                    <span style={{ fontSize: 13, color: '#94a3b8' }}>Covered</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ width: 16, height: 16, borderRadius: 3, background: '#ef4444' }} />
+                    <span style={{ fontSize: 13, color: '#94a3b8' }}>Gap</span>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: 24, fontSize: 13 }}>
+                  <span style={{ color: '#94a3b8' }}>
+                    Total: <strong style={{ color: '#fff' }}>{totalCells}</strong> cells
+                  </span>
+                  <span style={{ color: '#10b981' }}>
+                    Covered: <strong>{coveredCells}</strong> ({coveragePct}%)
+                  </span>
+                  <span style={{ color: '#ef4444' }}>
+                    Gaps: <strong>{totalCells - coveredCells}</strong> ({gapPct}%)
+                  </span>
+                </div>
+              </div>
+
+              {/* Heatmap Grid */}
+              <div style={{
+                background: '#12121a',
+                border: '1px solid #2d2d44',
+                borderRadius: 12,
+                padding: 24,
+                overflowX: 'auto',
+              }}>
+                {/* Y-axis label */}
+                <div style={{
+                  position: 'relative',
+                  display: 'flex',
+                }}>
+                  <div style={{
+                    width: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <span style={{
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: '#94a3b8',
+                    }}>
+                      Language
+                    </span>
+                  </div>
+
+                  <div style={{ flex: 1 }}>
+                    {/* Column Headers */}
+                    <div style={{
+                      display: 'flex',
+                      marginLeft: 100,
+                      marginBottom: 4,
+                    }}>
+                      {CATEGORIES.map(cat => (
+                        <div
+                          key={cat.name}
+                          style={{
+                            flex: 1,
+                            textAlign: 'center',
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: cat.critical ? '#fca5a5' : '#94a3b8',
+                            padding: '4px 2px',
+                          }}
+                        >
+                          {cat.name}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Data rows */}
+                    {matrix.map(row => (
+                      <div
+                        key={row.language}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginBottom: 2,
+                        }}
+                      >
+                        {/* Language label */}
+                        <div style={{
+                          width: 100,
+                          flexShrink: 0,
+                          padding: '6px 8px',
+                          fontSize: 12,
+                          fontWeight: 500,
+                          color: row.language === 'English' ? '#10b981' : '#e2e8f0',
+                          textAlign: 'right',
+                          paddingRight: 12,
+                        }}>
+                          {row.language}
+                        </div>
+
+                        {/* Category cells */}
+                        {CATEGORIES.map(cat => {
+                          const value = row[cat.name];
+                          const isCovered = value === 1;
+                          return (
+                            <div
+                              key={`${row.language}-${cat.name}`}
+                              title={`${row.language} - ${cat.name}: ${isCovered ? 'Covered' : 'Gap'}`}
+                              style={{
+                                flex: 1,
+                                height: 36,
+                                background: isCovered ? '#166534' : '#991b1b',
+                                border: `1px solid ${isCovered ? '#22c55e' : '#dc2626'}`,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: 14,
+                                fontWeight: 700,
+                                color: '#fff',
+                                cursor: 'pointer',
+                                transition: 'all 0.15s',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.opacity = '0.8';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.opacity = '1';
+                              }}
+                            >
+                              {value}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ))}
+
+                    {/* X-axis label */}
+                    <div style={{
+                      textAlign: 'center',
+                      marginTop: 16,
+                      marginLeft: 100,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: '#94a3b8',
+                    }}>
+                      Risk Category
+                    </div>
+                  </div>
+                </div>
+
+                {/* Note */}
+                <div style={{
+                  marginTop: 20,
+                  paddingTop: 16,
+                  borderTop: '1px solid #2d2d44',
+                  textAlign: 'center',
+                  fontSize: 12,
+                  color: '#f97316',
+                  fontStyle: 'italic',
+                }}>
+                  Note: Jailbreak, Bias, and Adversarial categories show near-zero multilingual coverage
+                </div>
+              </div>
+
+              {/* Insights */}
+              <div style={{
+                marginTop: 20,
+                padding: '16px 20px',
+                background: '#12121a',
+                border: '1px solid #2d2d44',
+                borderRadius: 8,
+              }}>
+                <h3 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 12 }}>Key Insights</h3>
+                <ul style={{ margin: 0, paddingLeft: 20, color: '#94a3b8', fontSize: 13, lineHeight: 1.8 }}>
+                  <li><strong style={{ color: '#10b981' }}>English</strong> has full coverage across all 7 categories</li>
+                  <li><strong style={{ color: '#ef4444' }}>Jailbreak, Bias, and Adversarial</strong> categories show gaps in 23/24 EU languages</li>
+                  <li><strong style={{ color: '#f97316' }}>18 languages</strong> have gaps in 5+ categories (critical status)</li>
+                  <li><strong style={{ color: '#94a3b8' }}>Truthfulness and Over-refusal</strong> have the best multilingual coverage</li>
+                </ul>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Call to Action */}
         <div style={{
