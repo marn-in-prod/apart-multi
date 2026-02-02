@@ -1,0 +1,198 @@
+{
+  "metadata": {
+    "title": "SafetyGap Benchmark Database",
+    "version": "1.0",
+    "last_updated": "2026-02-01",
+    "eu_languages": 24,
+    "total_benchmarks": 15
+  },
+  "benchmarks": [
+    {
+      "name": "TruthfulQA",
+      "category": "Truthfulness",
+      "eu_language_coverage": 22,
+      "total_language_coverage": 22,
+      "eu_languages_covered": ["English", "French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian"],
+      "eu_languages_missing": ["Irish", "Maltese"],
+      "source": "Lin et al. 2022",
+      "url": "https://github.com/sylinrl/TruthfulQA",
+      "multilingual_source": "EU20 Benchmark Suite (DeepL translation)",
+      "eu_ai_act_article": "55(1)(b)"
+    },
+    {
+      "name": "OR-Bench",
+      "category": "Over-refusal",
+      "eu_language_coverage": 24,
+      "total_language_coverage": 24,
+      "eu_languages_covered": ["English", "French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "eu_languages_missing": [],
+      "source": "Cui et al. 2024",
+      "url": "https://github.com/justincui03/or-bench",
+      "multilingual_source": "Towards Safe Multilingual Frontier AI (2024)",
+      "eu_ai_act_article": "Code of Practice"
+    },
+    {
+      "name": "RealToxicityPrompts",
+      "category": "Toxicity",
+      "eu_language_coverage": 10,
+      "total_language_coverage": 14,
+      "eu_languages_covered": ["English", "French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Swedish", "Czech", "Polish"],
+      "eu_languages_missing": ["Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Gehman et al. 2020",
+      "url": "https://allenai.org/data/real-toxicity-prompts",
+      "multilingual_source": "RTP-LX (de Wynter et al. 2024)",
+      "eu_ai_act_article": "55(1)(c)"
+    },
+    {
+      "name": "PolygloToxicityPrompts",
+      "category": "Toxicity",
+      "eu_language_coverage": 8,
+      "total_language_coverage": 17,
+      "eu_languages_covered": ["English", "French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish"],
+      "eu_languages_missing": ["Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Jain et al. 2024",
+      "url": "https://github.com/polyglo/toxicity",
+      "multilingual_source": "Native collection",
+      "eu_ai_act_article": "55(1)(c)"
+    },
+    {
+      "name": "XSafety",
+      "category": "General Safety",
+      "eu_language_coverage": 5,
+      "total_language_coverage": 10,
+      "eu_languages_covered": ["English", "French", "German", "Spanish", "Italian"],
+      "eu_languages_missing": ["Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Wang et al. 2024",
+      "url": "https://github.com/Jarviswang94/XSafety",
+      "multilingual_source": "Native multilingual",
+      "eu_ai_act_article": "55(1)(b)"
+    },
+    {
+      "name": "M-ALERT",
+      "category": "Red-teaming",
+      "eu_language_coverage": 5,
+      "total_language_coverage": 5,
+      "eu_languages_covered": ["English", "French", "German", "Spanish", "Italian"],
+      "eu_languages_missing": ["Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Friedrich et al. 2024",
+      "url": "https://github.com/Babelscape/ALERT",
+      "multilingual_source": "Machine translation",
+      "eu_ai_act_article": "55(1)(a)"
+    },
+    {
+      "name": "MultiJail",
+      "category": "Jailbreak",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 10,
+      "eu_languages_covered": ["Italian"],
+      "eu_languages_missing": ["English", "French", "German", "Spanish", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Deng et al. 2024",
+      "url": "https://github.com/DAMO-NLP-SG/multilingual-safety-for-LLMs",
+      "multilingual_source": "Native multilingual (non-EU focus)",
+      "eu_ai_act_article": "55(1)(a)",
+      "note": "Covers Chinese, Vietnamese, Arabic, Korean, Thai, Bengali, Swahili, Javanese - only Italian from EU"
+    },
+    {
+      "name": "HarmBench",
+      "category": "Jailbreak",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Mazeika et al. 2024",
+      "url": "https://github.com/centerforaisafety/HarmBench",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(a)"
+    },
+    {
+      "name": "AdvBench",
+      "category": "Adversarial",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Zou et al. 2023",
+      "url": "https://github.com/llm-attacks/llm-attacks",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(a)"
+    },
+    {
+      "name": "BBQ",
+      "category": "Bias",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Parrish et al. 2022",
+      "url": "https://github.com/nyu-mll/BBQ",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(b)"
+    },
+    {
+      "name": "StereoSet",
+      "category": "Bias",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Nadeem et al. 2021",
+      "url": "https://github.com/moinnadeem/StereoSet",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(b)"
+    },
+    {
+      "name": "DecodingTrust",
+      "category": "Trustworthiness",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Wang et al. 2024",
+      "url": "https://decodingtrust.github.io/",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(b)"
+    },
+    {
+      "name": "SimpleSafetyTests",
+      "category": "General Safety",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Vidgen et al. 2024",
+      "url": "https://github.com/bertievidgen/SimpleSafetyTests",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(b)"
+    },
+    {
+      "name": "DoNotAnswer",
+      "category": "Refusal",
+      "eu_language_coverage": 1,
+      "total_language_coverage": 1,
+      "eu_languages_covered": ["English"],
+      "eu_languages_missing": ["French", "German", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "Wang et al. 2024",
+      "url": "https://github.com/Libr-AI/do-not-answer",
+      "multilingual_source": "None - English only",
+      "eu_ai_act_article": "55(1)(c)"
+    },
+    {
+      "name": "LinguaSafe",
+      "category": "General Safety",
+      "eu_language_coverage": 4,
+      "total_language_coverage": 17,
+      "eu_languages_covered": ["English", "French", "German", "Italian"],
+      "eu_languages_missing": ["Spanish", "Portuguese", "Dutch", "Polish", "Swedish", "Czech", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese"],
+      "source": "LinguaSafe 2025",
+      "url": "https://github.com/linguasafe/linguasafe",
+      "multilingual_source": "Native multilingual",
+      "eu_ai_act_article": "55(1)(b)"
+    }
+  ],
+  "gap_summary": {
+    "critical_categories": ["Jailbreak", "Bias", "Adversarial"],
+    "critical_languages": ["Polish", "Greek", "Hungarian", "Romanian", "Danish", "Finnish", "Slovak", "Bulgarian", "Croatian", "Lithuanian", "Latvian", "Slovenian", "Estonian", "Irish", "Maltese", "Dutch", "Swedish", "Czech"],
+    "adequate_categories": ["Truthfulness", "Over-refusal"],
+    "key_finding": "75% of EU official languages have no benchmarks for jailbreak resistance, bias detection, or adversarial robustness"
+  }
+}
